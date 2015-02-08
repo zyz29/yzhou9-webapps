@@ -94,9 +94,9 @@ for key, restaurant in restaurantDict.iteritems():
 		close_time = t[-8:]
 		cursor.execute("insert into hours (restId, day, open, close) values ('%s', 'SU', '%s', '%s')" % (restId, open_time, close_time))
 
-	##############
-	## Add menu ##
-	##############
+	###############
+	## Add menus ##
+	###############
 
 	menuList = restaurant['menus']
 
@@ -104,6 +104,34 @@ for key, restaurant in restaurantDict.iteritems():
 		currency = menuDict['currency_symbol']
 		menu_name = menuDict['menu_name']
 		cursor.execute("insert into menus (restId, menu_name, currency) values ('%s', '%s', '%s')" % (restId, menu_name, currency))
+
+		###############
+		## Add items ##
+		###############
+
+		cursor.execute("SELECT menuId FROM menus WHERE restId='%s' AND menu_name='%s'" % (restId, menu_name))
+		menuId = cursor.fetchone()[0]
+
+		secList = menuDict['sections']
+
+		for secDict in secList:
+			section_name = secDict['section_name']
+			subsecList = secDict['subsections']
+
+			for subsecDict in subsecList:
+				subsection_name = subsecDict['subsection_name']
+				contentList = subsecDict['contents']
+
+				for contentDict in contentList:
+					item_type = contentDict.get('type')
+					if item_type == 'ITEM':
+						description = contentDict.get('description')
+						item_name = contentDict.get('name')
+						price = contentDict.get('price')
+
+						print item_name, price
+
+						cursor.execute("insert into items (menuId, item_name, category, description, price) values ('%s', '%s', '%s', '%s', '%s')" % (menuId, item_name, section_name, description, price))
 
 cnx.commit()
 cnx.close()
