@@ -94,5 +94,16 @@ for key, restaurant in restaurantDict.iteritems():
 		close_time = t[-8:]
 		cursor.execute("insert into hours (restId, day, open, close) values ('%s', 'SU', '%s', '%s')" % (restId, open_time, close_time))
 
+	##############
+	## Add menu ##
+	##############
+
+	menuList = restaurant['menus']
+
+	for menuDict in menuList:
+		currency = menuDict['currency_symbol']
+		menu_name = menuDict['menu_name']
+		cursor.execute("insert into menus (restId, menu_name, currency) values ('%s', '%s', '%s')" % (restId, menu_name, currency))
+
 cnx.commit()
 cnx.close()
