@@ -67,11 +67,32 @@ for key, restaurant in restaurantDict.iteritems():
 	for t in tueDict:
 		open_time = t[:8]
 		close_time = t[-8:]
-		cursor.execute("insert into hours (restId, day, open, close) values ('')")
-#Insert hours (hardcoded) for some restaurants
-#addHours = ("insert into hours (restId, day, open, close) values ('0559f40309a19b3949d5','M','11:00:00','21:00:00')")
-#cursor.execute(addHours)	
+		cursor.execute("insert into hours (restId, day, open, close) values ('%s', 'T', '%s', '%s')" % (restId, open_time, close_time))
+
+	for t in wedDict:
+		open_time = t[:8]
+		close_time = t[-8:]
+		cursor.execute("insert into hours (restId, day, open, close) values ('%s', 'W', '%s', '%s')" % (restId, open_time, close_time))
+
+	for t in thuDict:
+		open_time = t[:8]
+		close_time = t[-8:]
+		cursor.execute("insert into hours (restId, day, open, close) values ('%s', 'TH', '%s', '%s')" % (restId, open_time, close_time))
+
+	for t in firDict:
+		open_time = t[:8]
+		close_time = t[-8:]
+		cursor.execute("insert into hours (restId, day, open, close) values ('%s', 'F', '%s', '%s')" % (restId, open_time, close_time))
+
+	for t in satDict:
+		open_time = t[:8]
+		close_time = t[-8:]
+		cursor.execute("insert into hours (restId, day, open, close) values ('%s', 'S', '%s', '%s')" % (restId, open_time, close_time))
+
+	for t in sunDict:
+		open_time = t[:8]
+		close_time = t[-8:]
+		cursor.execute("insert into hours (restId, day, open, close) values ('%s', 'SU', '%s', '%s')" % (restId, open_time, close_time))
 
 cnx.commit()
 cnx.close()
-
