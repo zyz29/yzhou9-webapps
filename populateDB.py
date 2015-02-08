@@ -128,10 +128,7 @@ for key, restaurant in restaurantDict.iteritems():
 						description = contentDict.get('description')
 						item_name = contentDict.get('name')
 						price = contentDict.get('price')
-
-						print item_name, price
-
-						cursor.execute("insert into items (menuId, item_name, category, description, price) values ('%s', '%s', '%s', '%s', '%s')" % (menuId, item_name, section_name, description, price))
+						cursor.execute("""insert into items (menuId, item_name, section, subsection, description, price) values ("%s", "%s", "%s", "%s", "%s", "%s")""" % (menuId, item_name.encode('ascii', 'ignore'), section_name.encode('ascii', 'ignore'), subsection_name.encode('ascii', 'ignore'), description.encode('ascii', 'ignore'), price))
 
 cnx.commit()
 cnx.close()

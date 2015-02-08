@@ -107,12 +107,13 @@ createTableQuery = ('''CREATE TABLE items (
 						itemId INT NOT NULL AUTO_INCREMENT,
 						menuId INT NOT NULL,
 						item_name VARCHAR(45) NOT NULL,
-						category VARCHAR(20) NOT NULL,
+						section VARCHAR(45) NOT NULL,
+						subsection VARCHAR(45) NOT NULL,
 						description VARCHAR(100),
 						price VARCHAR(45),
 						PRIMARY KEY(itemId),
 						FOREIGN KEY(menuId) REFERENCES menus(menuId) ON DELETE CASCADE,
-						UNIQUE KEY(menuId, item_name) USING BTREE)'''
+						UNIQUE KEY(menuId, price, section, subsection, item_name) USING BTREE)'''
 		   )
 cursor.execute(createTableQuery)
 
