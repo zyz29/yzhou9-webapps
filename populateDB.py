@@ -79,7 +79,7 @@ for key, restaurant in restaurantDict.iteritems():
 		close_time = t[-8:]
 		cursor.execute("insert into hours (restId, day, open, close) values ('%s', 'TH', '%s', '%s')" % (restId, open_time, close_time))
 
-	for t in firDict:
+	for t in friDict:
 		open_time = t[:8]
 		close_time = t[-8:]
 		cursor.execute("insert into hours (restId, day, open, close) values ('%s', 'F', '%s', '%s')" % (restId, open_time, close_time))
