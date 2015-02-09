@@ -4,6 +4,7 @@ import mysql.connector
 import json
 from decimal import *
 import random
+import re
 
 #Define database variables
 DATABASE_USER = 'root'
@@ -23,9 +24,9 @@ inputFile.close()
 #Loop through the restaurants and add info and menu to database
 for key, restaurant in restaurantDict.iteritems():
 	
-	###############################
-	## Add restaurant info first ##
-	###############################
+	#####################
+	## Add restaurants ##
+	#####################
 
 	inputDict = {
 		'restCd' : key,
@@ -44,9 +45,9 @@ for key, restaurant in restaurantDict.iteritems():
 	addRestaurant = ("INSERT INTO restaurants (restCd, name, address, city, state, zip, phone, lat, lng, url) VALUES (%(restCd)s,  %(name)s, %(address)s, %(city)s, %(state)s, %(zip)s, %(phone)s, %(lat)s, %(lng)s, %(url)s)")
 	cursor.execute(addRestaurant,inputDict)
 
-	###################
-	## Add hour info ##
-	###################
+	###############
+	## Add hours ##
+	###############
 
 	cursor.execute("SELECT restId FROM restaurants WHERE restCd='%s'" % (key))
 	restId = cursor.fetchone()[0]
@@ -115,15 +116,11 @@ for key, restaurant in restaurantDict.iteritems():
 		secList = menuDict['sections']
 
 		for secDict in secList:
-			section_name = secDict['section_name']
-			if section_name is not None:
-				section_name.encode('ascii', 'ignore')
+			section_name = re.escape(secDict['section_name'])
 			subsecList = secDict['subsections']
 
 			for subsecDict in subsecList:
-				subsection_name = subsecDict['subsection_name']
-				if subsection_name is not None:
-					subsection_name.encode('ascii', 'ignore')
+				subsection_name = re.escape(subsecDict['subsection_name'])
 				contentList = subsecDict['contents']
 
 				for contentDict in contentList:
@@ -131,12 +128,10 @@ for key, restaurant in restaurantDict.iteritems():
 					if item_type == 'ITEM':
 						description = contentDict.get('description')
 						if description is not None:
-							description.encode('ascii', 'ignore')
-						item_name = contentDict.get('name')
-						if item_name is not None:
-							item_name.encode('ascii', 'ignore')
+							description = re.escape(description)
+						item_name = re.escape(contentDict.get('name'))
 						price = contentDict.get('price')
-						cursor.execute("""insert into items (menuId, item_name, section, subsection, description, price) values ("%s", "%s", "%s", "%s", "%s", "%s")""" % (menuId, item_name, section_name, subsection_name, description, price))
+						cursor.execute("insert into items (menuId, item_name, section, subsection, description, price) values ('%s', '%s', '%s', '%s', '%s', '%s')" % (menuId, item_name, section_name, subsection_name, description, price))
 
 cnx.commit()
 cnx.close()
