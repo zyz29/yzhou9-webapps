@@ -3,11 +3,20 @@ import sys
 import mysql.connector
 from collections import OrderedDict
 
+#Define database variables
+DATABASE_USER = 'root'
+DATABASE_HOST = '127.0.0.1'
+DATABASE_NAME = 'feedND'
+
+#Create connection to MySQL
+cnx = mysql.connector.connect(user=DATABASE_USER, host=DATABASE_HOST, database=DATABASE_NAME)
+cursor = cnx.cursor()
+
 class ExampleApp(object):
     @cherrypy.expose
     def index(self):
-	d = {'Subway':427.0, "O'Rourke's Public House":632.0, 'The Mark Dine & Tap':730.0}
-        OrderedDict(sorted(d.items(), key=lambda t: t[1]))
+	#d = {'Subway':427.0, "O'Rourke's Public House":632.0, 'The Mark Dine & Tap':730.0}
+        #OrderedDict(sorted(d.items(), key=lambda t: t[1]))
 	result = """
 	<!DOCTYPE html>
 	<html>
@@ -48,12 +57,21 @@ class ExampleApp(object):
 	<table>
 	  <tr>
 	    <th>Location</th>
-	    <th>Distance/m</th>
+	    <th>Address</th>
 	  </tr>
 		"""
-	for item in reversed(d.items()):
-	   result += "<tr><td>"+item[0]+"</td><td>"+str(item[1])+"</tr>"
-        result += "</table></body></html>"
+	#for item in reversed(d.items()):
+	#   result += "<tr><td>"+item[0]+"</td><td>"+str(item[1])+"</tr>"
+        
+	cursor.execute('select name, address, state from restaurants')
+	row = cursor.fetchone()
+	while (cursor is not None) and (row is not None):
+		result += "<tr><td>"+row[0]+"</td><td>"+row[1]+", "+row[2]+"</tr>"
+		row = cursor.fetchone()
+
+	result += "</table></body></html>"
+	#Define database variables
+	cnx.close()
         return result
     @cherrypy.expose
     def showdb(self):
