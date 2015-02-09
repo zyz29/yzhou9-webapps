@@ -116,19 +116,27 @@ for key, restaurant in restaurantDict.iteritems():
 
 		for secDict in secList:
 			section_name = secDict['section_name']
+			if section_name is not None:
+				section_name.encode('ascii', 'ignore')
 			subsecList = secDict['subsections']
 
 			for subsecDict in subsecList:
 				subsection_name = subsecDict['subsection_name']
+				if subsection_name is not None:
+					subsection_name.encode('ascii', 'ignore')
 				contentList = subsecDict['contents']
 
 				for contentDict in contentList:
 					item_type = contentDict.get('type')
 					if item_type == 'ITEM':
 						description = contentDict.get('description')
+						if description is not None:
+							description.encode('ascii', 'ignore')
 						item_name = contentDict.get('name')
+						if item_name is not None:
+							item_name.encode('ascii', 'ignore')
 						price = contentDict.get('price')
-						cursor.execute("""insert into items (menuId, item_name, section, subsection, description, price) values ("%s", "%s", "%s", "%s", "%s", "%s")""" % (menuId, item_name.encode('ascii', 'ignore'), section_name.encode('ascii', 'ignore'), subsection_name.encode('ascii', 'ignore'), description.encode('ascii', 'ignore'), price))
+						cursor.execute("""insert into items (menuId, item_name, section, subsection, description, price) values ("%s", "%s", "%s", "%s", "%s", "%s")""" % (menuId, item_name, section_name, subsection_name, description, price))
 
 cnx.commit()
 cnx.close()
