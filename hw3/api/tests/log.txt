@@ -1,0 +1,53 @@
+Script started on Tue Mar 24 19:51:28 2015
+]0;ec2-user@ip-10-0-0-180:/var/www/yzhou9-webapps/hw3/api/tests[?1034h[ec2-user@ip-10-0-0-180 tests]$ sudo python restaurantstest.py 
+200
+[{u'city': u'South Bend', u'name': u"Macri's Italian Bakery", u'url': u'http://www.macrifamily.com/', u'long': u'-86.24427400', u'state': u'IN', u'href': u'restaurants/1/categories', u'address': u'214 North Niles Ave.', u'lat': u'41.67825400'}, {u'city': u'South Bend', u'name': u'Mandarin House', u'url': u'http://www.mandarinhousein.com', u'long': u'-86.21752261', u'state': u'IN', u'href': u'restaurants/2/categories', u'address': u'2104 Edison Rd.', u'lat': u'41.69432400'}, {u'city': u'South Bend', u'name': u"Rohr's", u'url': u'http://morrisinn.nd.edu/dining/rohrs/', u'long': u'-86.23883200', u'state': u'IN', u'href': u'restaurants/3/categories', u'address': u'1 Notre Dame', u'lat': u'41.75663400'}, {u'city': u'South Bend', u'name': u'Club 23', u'url': u'http://club-23.com', u'long': u'-86.23784300', u'state': u'IN', u'href': u'restaurants/4/categories', u'address': u'744 N. Notre Dame Ave.', u'lat': u'41.68504000'}, {u'city': u'South Bend', u'name': u'Sunny Italy Cafe', u'url': u'http://sunnyitalycafe.com', u'long': u'-86.24484385', u'state': u'IN', u'href': u'restaurants/5/categories', u'address': u'601 N. Niles Ave.', u'lat': u'41.68338635'}, {u'city': u'South Bend', u'name': u"Sorin's", u'url': u'http://morrisinn.nd.edu/dining/sorins/', u'long': u'-86.23883200', u'state': u'IN', u'href': u'restaurants/6/categories', u'address': u'1 Notre Dame Ave.', u'lat': u'41.75663400'}, {u'city': u'South Bend', u'name': u'The Emporium', u'url': u'http://eastbankemporium.com', u'long': u'-86.24434400', u'state': u'IN', u'href': u'restaurants/7/categories', u'address': u'121 S. Niles Ave.', u'lat': u'41.67603100'}, {u'city': u'Notre Dame', u'name': u'Starbucks', u'url': u'http://www.starbucks.com/', u'long': u'-86.24888300', u'state': u'IN', u'href': u'restaurants/8/categories', u'address': u'217 South Dining Hall', u'lat': u'41.70569200'}, {u'city': u'Notre Dame', u'name': u'Burger King', u'url': u'http://www.bk.com/', u'long': u'-86.25014800', u'state': u'IN', u'href': u'restaurants/9/categories', u'address': u'University Of Notre Dame', u'lat': u'41.71213900'}, {u'city': u'South Bend', u'name': u"Barnaby's", u'url': u'http://www.southbendbarnabys.com', u'long': u'-86.24094428', u'state': u'IN', u'href': u'restaurants/10/categories', u'address': u'713 E. Jefferson Blvd.', u'lat': u'41.67529988'}, {u'city': u'Notre Dame', u'name': u'Subway', u'url': u'http://www.subway.com/', u'long': u'-87.27225100', u'state': u'IN', u'href': u'restaurants/11/categories', u'address': u'Lafortune Student Ctr', u'lat': u'38.05751400'}, {u'city': u'South Bend', u'name': u"O'Rourke's Public House", u'url': u'http://www.orourkespubhouse.com', u'long': u'-86.23585938', u'state': u'IN', u'href': u'restaurants/12/categories', u'address': u'1044 Angela Blvd.', u'lat': u'41.69264109'}, {u'city': u'Notre Dame', u'name': u'Legends of Notre Dame', u'url': u'http://www.legendsofnotredame.org/', u'long': u'-86.25133900', u'state': u'IN', u'href': u'restaurants/13/categories', u'address': u'100 Legends', u'lat': u'41.70711900'}, {u'city': u'South Bend', u'name': u'Linebacker Lounge', u'url': u'http://www.backer-nd.com', u'long': u'-86.22478008', u'state': u'IN', u'href': u'restaurants/14/categories', u'address': u'1631 S. Bend Ave.', u'lat': u'41.69419330'}, {u'city': u'South Bend', u'name': u'The Mark Dine & Tap', u'url': u'http://themarkdineandtap.com/', u'long': u'-86.23542500', u'state': u'IN', u'href': u'restaurants/15/categories', u'address': u'1234 Eddy St.', u'lat': u'41.69177600'}, {u'city': u'South Bend', u'name': u"ciao's", u'url': u'http://www.ciaosrestaurant.com/', u'long': u'-86.24455000', u'state': u'IN', u'href': u'restaurants/16/categories', u'address': u'501 North Niles Ave.', u'lat': u'41.68266100'}]
+
+200
+POST /restaurants     ...     Restaurants.POST
+POST /restaurants body:
+
+
+200
+GET /restaurants/{id=11}   ...   RestaurantID.GET
+
+200
+[{u'href': u'restaurants/11/menus/23/items', u'name': u'Breakfast'}, {u'href': u'restaurants/11/menus/24/items', u'name': u'Drinks'}, {u'href': u'restaurants/11/menus/22/items', u'name': u'Menu'}]
+
+200 GET /restaurants/{restID=11}/categories/{catID=82}  ...   MenuID.GET
+
+500
+
+200
+[{u'orderId': u'4', u'placed': u'0', u'userId': u'1', u'lastUpdated': u'2015-03-24'}]
+
+200
+{u'orderID': 4}
+
+200
+[{u'orderId': u'4', u'placed': u'0', u'userId': u'1', u'lastUpdated': u'2015-03-24'}]
+
+200
+PUT /orders/{id=4}      ...     OrderID.PUT
+PUT /orders body:
+
+
+200
+DELETE /orders/{id=4}   ...   OrderID.DELETE
+
+200
+[{u'orderId': u'4', u'itemId': u'1', u'orderItemId': u'2', u'quantity': u'1'}]
+
+200
+checkout
+
+200
+{u'orderID': u'4', u'itemID': u'1205', u'errors': [], u'orderItemID': 10, u'quantity': 1}
+
+200
+{u'errors': [], u'orderItemID': 10, u'quantity': 1}
+
+200
+{u'errors': []}
+]0;ec2-user@ip-10-0-0-180:/var/www/yzhou9-webapps/hw3/api/tests[ec2-user@ip-10-0-0-180 tests]$ 
+Script done on Tue Mar 24 19:51:40 2015
