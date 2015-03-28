@@ -81,6 +81,7 @@ class UserRegistration(object):
             return errorJSON(code=9003, message="Expected tel 'phone' for user as JSON input")
         
 	try:
+            password = password.pop(0)
             self.check_params(name=name, email=email, password=password, phone=phone)
         except ValidationException as ex:
             print ex.message
