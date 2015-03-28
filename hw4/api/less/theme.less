@@ -1,0 +1,74 @@
+@header-offset: 50px;
+
+/* Offset to compensate for the height of the fixed header. */
+body {
+  margin-top: @header-offset + 30px;
+}
+
+/* Invisible alert box fixed at top of screen. */
+#alerts {
+  position: fixed;
+  top: 80px;
+  left: 30%;
+  right: 30%;
+  z-index: 2000;
+}
+
+.list-group-item {
+
+  &:hover, &:focus {
+
+    background-color: @component-active-bg;
+    border-color: @list-group-active-bg;
+
+    & > * > .list-group-item-text {
+      color: @list-group-active-text-color;
+    }
+
+    > * > .list-group-item-heading {
+      color: white;
+    }
+  }
+
+  > a {
+    text-decoration: none;
+    color: @gray-base;
+  }
+
+  .list-group {
+    margin: 10px 0;
+  }
+}
+
+.category-sublist {
+  display: none;
+}
+
+@side-menu-width: 500px;
+
+#order-panel {
+
+  @padding: 15px;
+
+  width: 100%;
+  left: -100%;
+
+  position: fixed;
+  top: 0;
+  height: 100%;
+  z-index: 1030;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: @gray-lighter;
+  padding: @padding;
+  padding-top: @header-offset + @padding;
+}
+
+/* When the window is at least 500px wide, fix the width of the menu to
+ * 500px. */
+@media (min-width: @side-menu-width) {
+
+  #order-panel {
+    width: @side-menu-width;
+    left: -@side-menu-width;
+  }
+}
